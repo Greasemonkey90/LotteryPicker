@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="game_choices">
+        <item>Click here to choose a game</item>
+        <item> Pick 3</item>
+        <item>Pick 4</item>
+        <item>Cash 5</item>
+        <item>Powerball</item>
+        <item>Mega Millions</item>
+        <item>Cash4Life</item>
+        <item>Bank a Million</item>
+    </string-array>
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LotteryPicker</string>
+    <string name="header">Select from a Virginia lottery game below then hit button to generate numbers!</string>
+    <string name="button_text">Generate lucky numbers</string>
+    <string name="drawDays">Draw days:\u0020 </string>
+    <string name="drawTimes">Draw time(s):\u0020</string>
+</resources>
