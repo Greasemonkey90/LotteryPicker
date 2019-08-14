@@ -66,6 +66,7 @@
        style="@style/ball_appearance"/>
 
 </LinearLayout>
+
     <TextView
         android:id="@+id/dayField"
         android:layout_width="match_parent"
@@ -79,4 +80,5 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/generate"
         android:gravity="center_horizontal"/>
+
 </RelativeLayout>

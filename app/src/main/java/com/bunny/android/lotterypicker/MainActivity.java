@@ -12,20 +12,23 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
+
 import java.util.Random;
+import java.util.Collections;
 import java.util.ArrayList;
 
-
+@SuppressWarnings("unchecked")
 public class MainActivity extends AppCompatActivity implements OnItemSelectedListener {
-    ArrayList<Integer> theList = new ArrayList<>();
+    //ArrayList<Integer> theList = new ArrayList<>();
+    ArrayList<Integer> theList;
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
     private TextView theDAY;
     private TextView theTIME;
+
     String gameDays;
     String gameTimes;
     Integer getGame;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
         adapter.setDropDownViewResource((android.R.layout.simple_spinner_dropdown_item));
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-
     }
     @Override
     public void onItemSelected(AdapterView<?> parent,View view, int position,long id){
@@ -66,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
         showNumber6.setVisibility(View.GONE);
         TextView lastBankBall = findViewById(R.id.lastBankBall);
         lastBankBall.setVisibility(View.GONE);
-
     }
 
     public void displayDaysAndTimes(){
@@ -87,114 +88,14 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
         loadActivity();
          getGame = spinner.getSelectedItemPosition();
 
-
         return getGame;
     }
-
-    public void pick3() {
-        loadActivity();
-        for (int count = 1; count <= 3; count++) {
-            Random randomNum = new Random();
-            int selectedNum = randomNum.nextInt(9);
-            theList.add(selectedNum);
-        }
-    }
-    public void pick4(){
-        loadActivity();
-        for (int count = 1; count <= 4; count++) {
-            Random randomNum = new Random();
-            int selectedNum = randomNum.nextInt(9);
-            theList.add(selectedNum);
-        }
-    }
-
-    public void cash5() {
-        loadActivity();
-        for (int count = 1; count <= 5; count++) {
-            Random randomNumber = new Random();
-            int selectedNum = randomNumber.nextInt(34) + 1;
-            boolean sameNumber = theList.contains(selectedNum);
-            if (!sameNumber) {
-                theList.add(selectedNum);
-            } else {
-                count--;
-            }
-        }
-    }
-    public void powerBall(){
-    loadActivity();
-        for (int count = 1; count <= 6; count++) {
-            if(count == 6){
-                Random lastPick = new Random();
-                int powerBallPick = lastPick.nextInt(26)+1;
-                theList.add(powerBallPick);
-            }
-            Random randomNumber = new Random();
-            int selectedNum = randomNumber.nextInt(69) + 1;
-            boolean sameNumber = theList.contains(selectedNum);
-            if (!sameNumber) {
-                theList.add(selectedNum);
-            } else {
-                count--;
-            }
-
-        }
-}
-      public void megaMillion(){
-          loadActivity();
-          for (int count = 1; count <= 6; count++) {
-              if(count == 6){
-                  Random lastPick = new Random();
-                  int megaBallPick = lastPick.nextInt(25)+1;
-                  theList.add(megaBallPick);
-              }
-              Random randomNum = new Random();
-              int selectedNum = randomNum.nextInt(70) + 1;
-              boolean sameNumber = theList.contains(selectedNum);
-              if (!sameNumber) {
-                  theList.add(selectedNum);
-              } else {
-                  count--;
-              }
-          }
-      }
-      public void cash4Life(){
-          loadActivity();
-          for (int count = 1; count <= 6; count++) {
-              if(count == 6){
-                  Random lastPick = new Random();
-                  int cashBallPick = lastPick.nextInt(4)+1;
-                  theList.add(cashBallPick);
-              }
-              Random randomNum = new Random();
-              int selectedNum = randomNum.nextInt(60) + 1;
-              boolean sameNumber = theList.contains(selectedNum);
-              if (!sameNumber) {
-                  theList.add(selectedNum);
-              } else {
-                  count--;
-              }
-          }
-      }
-      public void bankAMillion() {
-          loadActivity();
-          for (int count = 1; count <= 6; count++) {
-              Random randomNum = new Random();
-              int selectedNum = randomNum.nextInt(40) + 1;
-              boolean sameNumber = theList.contains(selectedNum);
-              if (!sameNumber) {
-                  theList.add(selectedNum);
-              } else {
-                  count--;
-              }
-          }
-      }
 
     public void ClickButton(View view) {
         displayList();
         displayDaysAndTimes();
         theList = null;
-        theList = new ArrayList<>();
+        theList = new gameNumbers();
         getGame = null;
     }
 
@@ -211,11 +112,9 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
         int thirdNumber = theList.get(2);
         showNumber3.setText(String.valueOf(thirdNumber));
         showNumber3.setVisibility(View.VISIBLE);
-
     }
 
     public void displayList() {
-
         TextView showNumber4 = findViewById(R.id.whereNumberShows4);
         TextView showNumber5 = findViewById(R.id.whereNumberShows5);
         TextView showNumber6 = findViewById(R.id.whereNumberShows6);
@@ -227,14 +126,14 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
             Toast.makeText(this,"Please select a game to continue",
                     Toast.LENGTH_LONG).show();
         } else if (getGame == 1) {
-            pick3();
+            theList = new gameNumbers().setPick3();
             showFirstThree();
             gameDays = "Everyday";
             gameTimes = "1:59 PM and 11:00 PM";
 
 
         }else if (getGame == 2) {
-            pick4();
+            theList = new gameNumbers().setPick4();
             showFirstThree();
             gameDays = "Everyday";
             gameTimes = "1:59 PM and 11:00 PM";
@@ -243,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
             showNumber4.setVisibility(View.VISIBLE);
 
         }else if (getGame == 3) {
-            cash5();
+            theList = new gameNumbers().setCash5();
             showFirstThree();
             gameDays = "Everyday";
             gameTimes = "1:59 PM and 11:00 PM";
@@ -255,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
             showNumber5.setVisibility(View.VISIBLE);
 
         }else if(getGame == 4) {
-            powerBall();
+            theList = new gameNumbers().setPowerBall();
             showFirstThree();
             gameDays = "Wednesday and Saturday";
             gameTimes = "11:00 PM";
@@ -269,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
             showNumber6.setText(String.valueOf(sixthNumber));
             showNumber6.setVisibility(View.VISIBLE);
         }else if(getGame==5){
-            megaMillion();
+            theList = new gameNumbers().setMegaMillion();
             showFirstThree();
             gameDays = "Tuesday and Friday";
             gameTimes = "11:00 PM";
@@ -283,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
             showNumber6.setText(String.valueOf(sixthNumber));
             showNumber6.setVisibility(View.VISIBLE);
         }else if(getGame==6){
-            cash4Life();
+            theList = new gameNumbers().setCash4Life();
             showFirstThree();
             gameDays = "Monday and Thursday";
             gameTimes = "9:00 PM";
@@ -297,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
             showNumber6.setText(String.valueOf(sixthNumber));
             showNumber6.setVisibility(View.VISIBLE);
         }else if(getGame==7){
-            bankAMillion();
+            theList = new gameNumbers().setBankAmillion();
             showFirstThree();
             gameDays = "Wednesday and Saturday";
             gameTimes = "11:00 PM";
