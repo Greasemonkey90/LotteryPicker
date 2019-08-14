@@ -13,13 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-import java.util.Random;
-import java.util.Collections;
 import java.util.ArrayList;
 
 @SuppressWarnings("unchecked")
 public class MainActivity extends AppCompatActivity implements OnItemSelectedListener {
-    //ArrayList<Integer> theList = new ArrayList<>();
     ArrayList<Integer> theList;
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
